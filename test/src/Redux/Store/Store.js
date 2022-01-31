@@ -1,11 +1,12 @@
 import {configureStore} from '@reduxjs/toolkit'
-import MainReducer from "../../Components/Main/MainSlice";
 import DataReducer from '../../Components/Data/dataSlice'
+import LoginReducer from '../../Components/Signin/SigninSlics'
 
  const Store = configureStore({
     reducer:{
-        Main:MainReducer,
-        Data:DataReducer
+        
+        Data:DataReducer,
+        Login:LoginReducer
         
     }
 })

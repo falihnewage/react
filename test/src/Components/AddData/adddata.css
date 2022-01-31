@@ -1,0 +1,20 @@
+
+.main{
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+ margin-top: 20%;
+}
+.main input{
+    text-align: center;
+    width: 250px;
+    margin: 7px;
+    border-radius: 8px;
+    height: 20px;
+}
+.main button{
+    width: 86px;
+    padding: 6px;
+    border-radius: 9px;
+}

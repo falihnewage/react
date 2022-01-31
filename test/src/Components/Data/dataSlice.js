@@ -1,46 +1,53 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import axios from 'axios'
+
 
 export const getdata = createAsyncThunk(
     'data',
-    async => {
-     fetch('https://jsonplaceholder.typicode.com/users', {
-            method: 'get',
-            headers: {
-                "content-type": "application/json"
-            }
-        }).then((res) =>{
-            return res.json
-        })
+    async(obj) => {
+        //   getting parameter
+      const res=await axios.get('http://localhost:8000/items')
+    return res.data
     }
 )
-console.log('ddddd',getdata());
+
+
 const initialState = {
     items: [],
-    loading: false
+    loading: false,
+    
 }
 export const Dataslice = createSlice(
     {
         name: 'Data',
         initialState,
         reducers: {
+            deleteItem:(state,{payload})=>{
+                 axios.delete(`http://localhost:8000/items/${payload}`)
+                 
+                 
+                }
+            
 
         },
         extraReducers: {
-            [getdata.pending]: () => {
-                console.log('pending stage');
+            [getdata.pending]: (state) => {
+                state.loading=true
 
             },
             [getdata.fulfilled]: (state, action) => {
 
-                state.loading=true
-                console.log(action);
+                state.loading=false
+                state.items=action.payload
                 console.log('fulfilled');
 
             },
-            [getdata.rejected]: () => {
+            [getdata.rejected]: (state) => {
                 console.log('rejected');
+                state.loading=false
 
-            }
+            },
+            
         }
 
     }
@@ -51,8 +58,9 @@ export const Dataslice = createSlice(
 
 
 
-const { reducer } = Dataslice
+const { reducer,actions } = Dataslice
 
+export const {deleteItem} =actions
 
 
 export default reducer
