@@ -1,12 +1,15 @@
 import axios from 'axios';
 import './Signin.css'
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { login } from './SigninSlics';
 import { Link } from 'react-router-dom';
+import { Login } from './SigninAction';
 
 
-const Signin = () => {
+const Signin = ({item}) => {
+     const {error}= useSelector(state=>state.Login)
+     
       const dispatch=useDispatch()
 
     let formData = new FormData();
@@ -20,17 +23,20 @@ const Signin = () => {
     })
 
     const handleChange =(e)=>{
-           setuser({...user,[e.target.name]:e.target.value})
+         setuser({...user,[e.target.name]:e.target.value})
     }
 
   return (<div>
       <div className="container">
+      
       <div className="form">
+       
+    <h1 className="h1">LOGIN</h1>
+   {error && <h1 class="h1">{error}</h1>} 
 
-    <h1 class="h1">LOGIN</h1>
 <input name='username' required onChange={handleChange} placeholder="email" className="input" type="email "/>
 <input name='password' required onChange={handleChange} placeholder="password" className="input" type="text"/>
-<button className='button' onClick={()=> !user.username && !user.password ? alert('fill every fields'): dispatch(login(user))} >Login</button>
+<button className='button' onClick={()=> !user.username && !user.password ? alert('fill every fields'): dispatch(Login(user))} >Login</button>
 
 
 </div>

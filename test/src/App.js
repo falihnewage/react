@@ -8,6 +8,7 @@ import Signin from './Components/Signin/Signin';
 import Signup from './Components/Signup/Signup';
 import Topnav from './Components/Navbar/Navbar';
 import { useSelector } from 'react-redux';
+import PrivateRoute from './Components/PrivateRoute/PrivateRoute';
 
 
 function App() {
@@ -19,9 +20,11 @@ function App() {
       <BrowserRouter>
        <Topnav/>
       <Routes>
-        <Route path='/' element={isauth ? <Navigate to ='/data' /> : <Signin/>} />
+        <Route path='/' element={ isauth ? <Data/>: <Signin/>} />
         <Route path='/data' element={<Data/>} />
+         <Route element={<PrivateRoute/>}>
         <Route path='/add' element={<Adddata/>} />
+        </Route>
         <Route path='/signup' element={<Signup/>} />
       </Routes>
       </BrowserRouter>

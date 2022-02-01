@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-
+import Cookies from 'js-cookie'
 const initialState = {
     loading:false,
     user:'',
@@ -15,11 +15,15 @@ const SigninSlics = createSlice({
     login:(state,{payload})=>{
       state.isauth=true
       state.user=payload
+      Cookies.set('token', '123456789',{ expires: 1 })
     },
+    loginfailed:(state,action)=>{
+      state.error=action.payload
+    }
   }
   
 });
 
-export const {login} = SigninSlics.actions;
+export const {login,loginfailed} = SigninSlics.actions;
 
 export default SigninSlics.reducer;

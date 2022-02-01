@@ -25,7 +25,7 @@ function Data() {
             {
                 
                 items.map((i) => (
-                    <div key={i.pk}>
+                    <div key={i.id}>
                         {
                            
                                 <div className='card' >
