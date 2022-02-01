@@ -3,7 +3,7 @@ import axios from "axios"
 
 export const signup = (frmdata) => dispatch => {
     const jdata = JSON.stringify(frmdata)
-    axios.post('http://restapi.adequateshop.com/api/authaccount/registration', jdata, {
+    axios.post(`${process.env.REACT_APP_BASE_API_KEY}api/authaccount/registration`, jdata, {
         headers: {
             'content-type': 'application/json',
             "Access-Control-Allow-Origin": "*",
