@@ -22,6 +22,16 @@
     justify-content: space-evenly;
     align-items: center;
 }
+.avtar button{
+    width: 100px;
+    height: 26px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.avtar button:hover{
+    background-color: #fff;
+    color: #000;
+}
 .img{
     justify-content: end;
 }

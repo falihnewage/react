@@ -37,6 +37,9 @@ const Signin = ({item}) => {
 <input name='username' required onChange={handleChange} placeholder="email" className="input" type="email "/>
 <input name='password' required onChange={handleChange} placeholder="password" className="input" type="text"/>
 <button className='button' onClick={()=> !user.username && !user.password ? alert('fill every fields'): dispatch(Login(user))} >Login</button>
+<br />
+<br />
+<Link to='/signup'> <button className='link-btn'>Dont have account ?</button></Link>
 
 
 </div>

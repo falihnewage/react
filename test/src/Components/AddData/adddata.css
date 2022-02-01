@@ -1,20 +1,37 @@
 
 .main{
  display: flex;
- flex-direction: column;
  justify-content: center;
  align-items: center;
- margin-top: 20%;
+ margin-top: 5%;
+ width: 100%;
 }
-.main input{
-    text-align: center;
-    width: 250px;
-    margin: 7px;
-    border-radius: 8px;
-    height: 20px;
-}
+
 .main button{
     width: 86px;
     padding: 6px;
     border-radius: 9px;
+}
+.main .left{
+    width: 50%;
+}
+
+.main .right{
+    width:50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 198px;
+}
+.main .left img{
+    width: fit-content;
+}
+.main .right input{
+    text-align: center;
+    width: 250px;
+    height: 40px;
+    margin: 7px;
+    border-radius: 8px;
+    height: 35px;
 }

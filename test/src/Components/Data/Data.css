@@ -8,6 +8,10 @@
     align-items: center;
     justify-content: center;
 }
+.c-container :hover{
+    transform: scale(1.05);
+    transition: ease all 1s;
+}
 .card button{
     width: 36%;
     padding: 6px;

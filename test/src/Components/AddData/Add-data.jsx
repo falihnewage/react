@@ -2,6 +2,7 @@ import axios from 'axios';
 import React from 'react';
 import './adddata.css'
 import 'react-toastify/dist/ReactToastify.css';
+import imag from './undraw_Preferences_popup_re_4qk0.png'
 import { ToastContainer, toast } from 'react-toastify';
 import { useEffect } from 'react';
 import { useState } from 'react';
@@ -15,7 +16,7 @@ const Adddata = () => {
     id: Date.now(),
     name: '',
     place: '',
-    age: 0
+    age: null
   })
 
   const handleInput = (e) => {
@@ -53,14 +54,24 @@ const Adddata = () => {
     <div className='main'>
 
       <ToastContainer />
-      <input name='name' placeholder='Name' value={input.name} onChange={handleInput} type="text" />
-      <br />
-      <input name='place' placeholder='Place' value={input.place} onChange={handleInput} type="text" />
-      <br />
-      <input name='age' placeholder='Age' value={input.age} onChange={handleInput} type="text" />
-      <br />
-      <br />
-      <button onClick={handleClick} >Add</button>
+      <div className="left">
+     <img src={imag} alt="" />
+      </div>
+      <div className="right">
+        <h1>ADD POST</h1>
+        <input name='name' placeholder='Name' value={input.name} onChange={handleInput} type="text" />
+        <br />
+        <input name='place' placeholder='Place' value={input.place} onChange={handleInput} type="text" />
+        <br />
+        <input name='age' placeholder='Age' value={input.age} onChange={handleInput} type="text" />
+        <br />
+        <br />
+        <button onClick={handleClick} >Add</button>
+
+      </div>
+
+
+
     </div>
   );
 };

@@ -14,8 +14,8 @@ const SigninSlics = createSlice({
   reducers:{
     login:(state,{payload})=>{
       state.isauth=true
-      state.user=payload
-      Cookies.set('token', '123456789',{ expires: 1 })
+      state.user=payload.Name
+      Cookies.set('token', payload.Token,{ expires: 1 })
     },
     loginfailed:(state,action)=>{
       state.error=action.payload
