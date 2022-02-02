@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getdata } from '../Data/dataSlice';
+import { AddData } from './AddSlice';
 
 const Adddata = () => {
   const notify = () => toast("Item Added Successfully!");
@@ -23,29 +24,6 @@ const Adddata = () => {
     setinput({ ...input, [e.target.name]: e.target.value })
   }
 
-
-
-  const handleClick = async () => {
-    if (!input.name || !input.place || !input.age) {
-      alert('fill all fields')
-    } else {
-      setinput({
-        name: '',
-        place: '',
-        age: 0,
-      })
-      await axios.post('http://localhost:8000/items', input).then((response) => {
-        console.log(response);
-        notify()
-        dispatch(getdata())
-
-
-      })
-    }
-
-
-
-  }
   useEffect(() => {
 
   }, [])
@@ -66,12 +44,9 @@ const Adddata = () => {
         <input name='age' placeholder='Age' value={input.age} onChange={handleInput} type="text" />
         <br />
         <br />
-        <button onClick={handleClick} >Add</button>
+        <button onClick={()=>dispatch(AddData(input))} >Add</button>
 
       </div>
-
-
-
     </div>
   );
 };
