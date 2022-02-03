@@ -1,17 +1,15 @@
-import axios from 'axios';
-import React from 'react';
-import './adddata.css'
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import imag from './undraw_Preferences_popup_re_4qk0.png'
-import { ToastContainer, toast } from 'react-toastify';
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { getdata } from '../Data/dataSlice';
+import './adddata.css';
 import { AddData } from './AddSlice';
+import imag from './undraw_Preferences_popup_re_4qk0.png';
 
 const Adddata = () => {
-  const notify = () => toast("Item Added Successfully!");
+ const{notify}= useSelector(state=>state.Adddata)
+ console.log('notify is',notify);
+  const pop = () => toast("Item Added Successfully!");
   const dispatch = useDispatch()
   const [input, setinput] = useState({
     id: Date.now(),
@@ -23,14 +21,21 @@ const Adddata = () => {
   const handleInput = (e) => {
     setinput({ ...input, [e.target.name]: e.target.value })
   }
+  const clear =()=>{
+    setinput({
+      name:"",
+      place:'',
+      age:''
+    })
+  }
 
   useEffect(() => {
-
-  }, [])
+    notify&&pop()
+  }, [notify])
 
   return (
     <div className='main'>
-
+       
       <ToastContainer />
       <div className="left">
      <img src={imag} alt="" />
@@ -44,7 +49,7 @@ const Adddata = () => {
         <input name='age' placeholder='Age' value={input.age} onChange={handleInput} type="text" />
         <br />
         <br />
-        <button onClick={()=>dispatch(AddData(input))} >Add</button>
+        <button onClick={()=>dispatch(AddData(input)).then(()=>clear())} >Add</button>
 
       </div>
     </div>

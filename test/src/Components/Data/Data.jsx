@@ -1,22 +1,20 @@
-import React, { useEffect } from 'react'
-import './Data.css'
+import React, { useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux'
-import Adddata from '../AddData/Add-data'
-import { getdata, deleteItem } from './dataSlice'
-import { useState } from 'react'
-
-
-
+import { Link } from 'react-router-dom'
+import './Data.css'
+import { DeleteData, getdata } from './dataSlice'
 
 
 function Data() {
+    
     const [search,setsearch]=useState()
-    let { loading, items } = useSelector(state => state.Data)
+    let { loading, items,error } = useSelector(state => state.Data)
     
 
-    const fltrd =  items.filter((i)=>i.name.toLowerCase() == search && search.toLowerCase())
+    const fltrd =  items.filter((i)=>i.name.toLowerCase().includes(search &&search.toLowerCase()) )
     const dispatch = useDispatch()
+    
     
     useEffect(() => {
         dispatch(getdata())
@@ -26,12 +24,13 @@ function Data() {
         <div>
 
             <h1>{loading}</h1>
+            {error && <h1>{error}</h1>}
             {loading && <Skeleton />}
             <input type="search" value={search} name="" style={{textAlign:'center',width:'350px',height:'40px'}} id="" placeholder='search by name ...'  onChange={(e)=>setsearch(e.target.value)} />
             <div className='top' style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'left' }}>
                      
                 {
-                    items && fltrd.length ==0 ?
+                    items && fltrd.length ===0 ?
                              
                          
                         items.map((i) => (
@@ -42,6 +41,9 @@ function Data() {
                                         <h1>{i.name}</h1>
                                         <h1>{i.place}</h1>
                                         <h1>{i.age}</h1>
+                                        <button onClick={()=>dispatch(DeleteData(i.id))} >delete</button>
+                                        <Link to={`/details/${i.id}`}><button style={{width:'108px',marginTop:'6px'}} >view </button></Link>
+                                        
                                     </div>
                                 }
 

@@ -5,14 +5,21 @@ const initialState = {
   
   status:{},
   loading:false,
+  notify:false
 };
 
 export const AddData = createAsyncThunk(
   'Add',
   async(input)=>{
     console.log(input);
-    const res =await axios.post('http://localhost:8000/items', input)
+    try {
+      const res =await axios.post('http://localhost:8000/items', input)
     return res.data
+    } catch (error) {
+      console.log('err',error);
+      return error
+    }
+    
   }
 )
 
@@ -25,9 +32,12 @@ const AddSlice = createSlice({
           state.loading=true
     },
     [AddData.fulfilled]:(state,{payload})=>{
+      state.notify=true
       console.log(payload);
        state.status=payload
        state.loading=false
+       
+       state.notify=false
     },
     [AddData.rejected]:()=>{
       console.log('rejected');
@@ -35,6 +45,6 @@ const AddSlice = createSlice({
   }
 });
 
-export const {} = AddSlice.actions;
+// export const {} = AddSlice.actions;
 
 export default AddSlice.reducer;

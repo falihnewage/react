@@ -3,11 +3,31 @@ import axios from 'axios'
 
 
 export const getdata = createAsyncThunk(
-    'data',
-    async(obj) => {
+    'data/get',
+    async (obj, { rejectWithValue }) => {
         //   getting parameter
-      const res=await axios.get('http://localhost:8000/items')
-    return res.data
+
+        try {
+            const res = await axios.get('http://localhost:8000/items')
+            //returning data from api response
+            return res.data
+        } catch (error) {
+            return rejectWithValue(`${error.message} something went wrong` )
+        }
+
+
+    }
+)
+export const DeleteData = createAsyncThunk(
+    'data/delete',
+    //   getting parameter as obj
+    async (obj) => {
+
+        await axios.delete(`http://localhost:8000/items/${obj}`)
+
+        //passing recived parameter(id) for deleting item
+        return obj
+
     }
 )
 
@@ -15,39 +35,50 @@ export const getdata = createAsyncThunk(
 const initialState = {
     items: [],
     loading: false,
-    
+    singleuser: [],
+    error: ''
+
 }
 export const Dataslice = createSlice(
     {
         name: 'Data',
         initialState,
         reducers: {
-            deleteItem:(state,{payload})=>{
-                 axios.delete(`http://localhost:8000/items/${payload}`)
-                 
-                 
-                }
-            
-
+            getPostById: (state, { payload }) => {
+                console.log('payload is ', payload);
+                state.singleuser = state.items.filter((i) => i.id == payload)
+            }
         },
         extraReducers: {
             [getdata.pending]: (state) => {
-                state.loading=true
+                state.loading = true
 
             },
             [getdata.fulfilled]: (state, action) => {
-
-                state.loading=false
-                state.items=action.payload
+                console.log(action.payload);
+                state.loading = false
+                state.items = action.payload
                 console.log('fulfilled');
 
             },
-            [getdata.rejected]: (state) => {
+            [getdata.rejected]: (state, { payload }) => {
+                state.error = payload
                 console.log('rejected');
-                state.loading=false
+                state.loading = false
 
             },
-            
+            [DeleteData.pending]: (state, { payload }) => {
+                console.log('delete pending');
+            },
+            [DeleteData.fulfilled]: (state, { payload }) => {
+
+                state.items = state.items.filter((i) => i.id !== payload)
+
+            },
+            [DeleteData.rejected]: (state, { payload }) => {
+                console.log('rejected');
+            }
+
         }
 
     }
@@ -58,9 +89,9 @@ export const Dataslice = createSlice(
 
 
 
-const { reducer,actions } = Dataslice
+const { reducer, actions } = Dataslice
 
-export const {deleteItem} =actions
+export const { deleteItem, getPostById } = actions
 
 
 export default reducer
