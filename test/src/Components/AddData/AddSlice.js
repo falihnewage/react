@@ -39,8 +39,9 @@ const AddSlice = createSlice({
        
        state.notify=false
     },
-    [AddData.rejected]:()=>{
+    [AddData.rejected]:(state)=>{
       console.log('rejected');
+      state.loading =false
     }
   }
 });

@@ -21,12 +21,16 @@ export const getdata = createAsyncThunk(
 export const DeleteData = createAsyncThunk(
     'data/delete',
     //   getting parameter as obj
-    async (obj) => {
-
-        await axios.delete(`http://localhost:8000/items/${obj}`)
+    async (obj,rejectWithValue) => {
+        try {
+            await axios.delete(`http://localhost:8000/items/${obj}`)
 
         //passing recived parameter(id) for deleting item
         return obj
+        } catch (error) {
+            return rejectWithValue(error.message)
+        }
+        
 
     }
 )

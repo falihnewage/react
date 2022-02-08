@@ -5,6 +5,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import './adddata.css';
 import { AddData } from './AddSlice';
 import imag from './undraw_Preferences_popup_re_4qk0.png';
+import { FiPlusCircle } from "react-icons/fi";
+
 
 const Adddata = () => {
  const{notify}= useSelector(state=>state.Adddata)
@@ -27,6 +29,7 @@ const Adddata = () => {
       place:'',
       age:''
     })
+    toast('Item added Successfully')
   }
 
   useEffect(() => {
@@ -36,7 +39,17 @@ const Adddata = () => {
   return (
     <div className='main'>
        
-      <ToastContainer />
+      <ToastContainer 
+          position="top-center"
+          autoClose={3300}
+          hideProgressBar
+          newestOnTop
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+      />
       <div className="left">
      <img src={imag} alt="" />
       </div>
@@ -44,12 +57,12 @@ const Adddata = () => {
         <h1>ADD POST</h1>
         <input name='name' placeholder='Name' value={input.name} onChange={handleInput} type="text" />
         <br />
-        <input name='place' placeholder='Place' value={input.place} onChange={handleInput} type="text" />
+        <input name='place' placeholder='brand' value={input.place} onChange={handleInput} type="text" />
         <br />
-        <input name='age' placeholder='Age' value={input.age} onChange={handleInput} type="text" />
+        <input name='age' placeholder='price' value={input.age} onChange={handleInput} type="text" />
         <br />
         <br />
-        <button onClick={()=>dispatch(AddData(input)).then(()=>clear())} >Add</button>
+        <button onClick={()=>dispatch(AddData(input)).then(()=>clear())} ><FiPlusCircle size={25}/> </button>
 
       </div>
     </div>
