@@ -8,6 +8,7 @@ const initialState = {
     isauth:false
 };
 
+
 const SigninSlics = createSlice({
   name: 'second',
   initialState,
@@ -19,11 +20,19 @@ const SigninSlics = createSlice({
     },
     loginfailed:(state,action)=>{
       state.error=action.payload
+    },
+    logout:(state,{payload})=>{
+      state.isauth=false
+      Cookies.remove('token')
+      
     }
+  },
+  extraReducers:{
+
   }
   
 });
 
-export const {login,loginfailed} = SigninSlics.actions;
+export const {login,loginfailed,logout} = SigninSlics.actions;
 
 export default SigninSlics.reducer;

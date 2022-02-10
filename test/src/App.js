@@ -11,6 +11,7 @@ import PrivateRoute from './Components/PrivateRoute/PrivateRoute';
 import Signin from './Components/Signin/Signin';
 import Signup from './Components/Signup/Signup';
 import Singlepost from "./Components/Singlepost/Singlepost";
+import Editpost from './Components/Editpost/Editpost';
 const Data = lazy(() => import('./Components/Data/Data'));
 const Adddata = lazy(() => import('./Components/AddData/Add-data'));
 
@@ -28,6 +29,7 @@ function App() {
          <Route element={<PrivateRoute/>}>
         <Route path='/add' element={ <Suspense fallback='Loading ... ' ><Adddata/></Suspense> } />
         <Route path='/details/:id' element={<Singlepost/>} />
+        <Route path='/edit/:id' element={<Editpost/>} />
         </Route>
         <Route path='/signup' element={<Signup/>} />
       </Routes>

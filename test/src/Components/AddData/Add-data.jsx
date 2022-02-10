@@ -6,6 +6,7 @@ import './adddata.css';
 import { AddData } from './AddSlice';
 import imag from './undraw_Preferences_popup_re_4qk0.png';
 import { FiPlusCircle } from "react-icons/fi";
+import moment from 'moment';
 
 
 const Adddata = () => {
@@ -17,7 +18,8 @@ const Adddata = () => {
     id: Date.now(),
     name: '',
     place: '',
-    age: null
+    age: null,
+    date:moment().format("YYYY/MM/DD HH:mm:ss")
   })
 
   const handleInput = (e) => {
@@ -27,7 +29,7 @@ const Adddata = () => {
     setinput({
       name:"",
       place:'',
-      age:''
+      age:'',
     })
     toast('Item added Successfully')
   }
@@ -60,6 +62,7 @@ const Adddata = () => {
         <input name='place' placeholder='brand' value={input.place} onChange={handleInput} type="text" />
         <br />
         <input name='age' placeholder='price' value={input.age} onChange={handleInput} type="text" />
+        
         <br />
         <br />
         <button onClick={()=>dispatch(AddData(input)).then(()=>clear())} ><FiPlusCircle size={25}/> </button>

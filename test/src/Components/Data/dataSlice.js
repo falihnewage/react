@@ -34,6 +34,18 @@ export const DeleteData = createAsyncThunk(
 
     }
 )
+export const Updatedata =createAsyncThunk(
+    'dat/update',
+    async (obj,{rejectWithValue})=>{
+        console.log('update dat is ',obj);
+        try {
+         const res=   await axios.put(`http://localhost:8000/items/${obj.id}`,obj)
+         console.log(res.data);
+        } catch (error) {
+            return rejectWithValue(error.message)
+        }
+    }
+)
 
 
 const initialState = {
